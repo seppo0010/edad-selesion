@@ -89,8 +89,7 @@ def wiki_data(wiki_title, function=None):
         raise exc
 
 def age(birthdate, today):
-    age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
-    return age
+    return (today - birthdate).days
 
 def get_players(year):
     players = []
@@ -122,13 +121,11 @@ def get_players(year):
     return players
 
 if __name__ == '__main__':
-    # get_players(1934)
-    # import sys
-    # os.exit(0)
+    results = {}
     for year in range(1930, 2026, 4):
         if year in (1938, 1942, 1946, 1950, 1954, 1970): continue
         players = get_players(year)
         if len(players) == 0:
             print(f'no players for {year}')
-        else:
-            print(json.dumps(players))
+        results[year] = players
+    print(json.dumps(results))
