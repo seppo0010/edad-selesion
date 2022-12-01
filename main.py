@@ -113,11 +113,11 @@ def get_players(year):
                     name = el.get('name').value.strip('[]').split('(')[0].split(']')[0].strip()
                     age_els = [int(x) for x in el.get('age').value.strip('{} ').split('|') if x.isdigit()]
                     if len(age_els) != 6: continue
-                    yos = age(
+                    days_old = age(
                         datetime.date(int(age_els[3]), int(age_els[4]), int(age_els[5])),
                         datetime.date(int(age_els[0]), int(age_els[1]), int(age_els[2])),
                     )
-                    players.append((name, yos))
+                    players.append({'name': name, 'age_days': days_old})
     return players
 
 if __name__ == '__main__':
